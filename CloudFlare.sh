@@ -1,6 +1,7 @@
+# add crontab | ajoutez un crontab
 # crontab -e
-# */1 * * * * /root/a.sh 0
-# */20 * * * * /root/a.sh 1
+# */1 * * * * /root/a.sh 0 # check every 1 minutes, if load > 10, block
+# */20 * * * * /root/a.sh 1 # check every 20 minutes, if load < 10, disable protection
 
 #!/bin/bash
 
@@ -11,11 +12,11 @@ loadavg=$(cat /proc/loadavg|awk '{printf "%f", $1}')
 maxload=10
 
 # API DOCUMENTATION : https://www.cloudflare.com/docs/client-api.html
-# help - I'm under attack!
-# high - High
-# med - Medium
-# low - Low
-# eoff - Essentially Off
+# help - Protection I'm under attack!
+# high - Protection High
+# med - Protection Medium
+# low - Protection Low
+# eoff - Protection Off
 
 #url1 = active protection
 url1="https://www.cloudflare.com/api_json.html?a=sec_lvl&tkn=API_KEY&email=MAIL_CCOUNT&z=DOMAIN&v=help"
