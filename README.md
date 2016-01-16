@@ -7,7 +7,7 @@ Active la protection CloudFlare si la charge serveur est supérieur à 10
 
 <h2>How to work ?</h2>
 
-1. Add a cron tab / Ajoutez une tâche cron
+Add a cron tab / Ajoutez une tâche cron
 
 ```crontab -e```
 
@@ -16,4 +16,4 @@ Active la protection CloudFlare si la charge serveur est supérieur à 10
 */20 * * * * /root/a.sh 1 # check every 20 minutes, if load < 10, disable protection
 ```
 
-2. Wait & See :p
+Wait & See :p
