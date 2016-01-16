@@ -11,8 +11,8 @@ Configure you API
 
 https://www.cloudflare.com/api_json.html?a=sec_lvl&tkn=API_KEY&email=MAIL_CCOUNT&z=DOMAIN&v=help
 
-API_KEY : you're API Key from CloudFlare
-MAIL_ACCOUNT : the email you use for you're account
+API_KEY : you're API Key from CloudFlare<br />
+MAIL_ACCOUNT : the email you use for you're account<br />
 DOMAIN : the domain you want protect
 
 Add a cron tab / Ajoutez une tâche cron
