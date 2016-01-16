@@ -8,7 +8,7 @@
 # $1 = 1min, $2 = 5min, $3 = 15min
 loadavg=$(cat /proc/loadavg|awk '{printf "%f", $1}')
 
-# load is 10, you cna
+# load is 10, you can modify this if you want load more than 10
 maxload=10
 
 # API DOCUMENTATION : https://www.cloudflare.com/docs/client-api.html
