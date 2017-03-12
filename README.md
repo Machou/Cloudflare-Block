@@ -1,6 +1,6 @@
 <h1>Cloudflare Blocking</h1>
 
-Enables CloudFlare protection " I'm Under Attack! " and the server load is greater than X
+Enable Cloudflare protection " I'm Under Attack! " if the server load is greater than 10. (You can customize this option.)
 
 
 <h2>How to work ?</h2>
