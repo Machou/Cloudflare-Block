@@ -1,9 +1,8 @@
-<h1>Cloudflare Blocking</h1>
+# Cloudflare Blocking
 
-Enable Cloudflare protection " I'm Under Attack! " if the server load is greater than 10. (You can customize this option.)
+Enable Cloudflare protection " I'm Under Attack! " if the server load is greater than 10. (Possibility to customize the script.)
 
-
-<h2>How to work ?</h2>
+## How to work ?
 
 Configure you API
 
