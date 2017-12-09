@@ -22,3 +22,7 @@ crontab -e
 */1 * * * * /root/a.sh 0 # check every 1 minutes, if load > 10, block
 */20 * * * * /root/a.sh 1 # check every 20 minutes, if load < 10, disable protection
 ```
+
+### License
+
+The script Real IP are distributed under the [The MIT License](https://opensource.org/licenses/MIT).
