@@ -5,24 +5,26 @@
 
 #!/bin/bash
 
+
 # $1 = 1min, $2 = 5min, $3 = 15min
 loadavg=$(cat /proc/loadavg|awk '{printf "%f", $1}')
+
 
 # load is 10, you can modify this if you want load more than 10
 maxload=10
 
-# API DOCUMENTATION : https://www.cloudflare.com/docs/client-api.html
-# help - Protection I'm under attack!
-# high - Protection High
-# med - Protection Medium
-# low - Protection Low
-# eoff - Protection Off
 
-#url1 = active protection
-url1="https://www.cloudflare.com/api_json.html?a=sec_lvl&tkn=API_KEY&email=MAIL_CCOUNT&z=DOMAIN&v=help"
+# API DOCUMENTATION : https://api.cloudflare.com/#zone-settings-get-security-level-setting
+# high             Threat scores greater than 0 will be challenged
+# medium           Threat scores greater than 14 will be challenged
+# low              Threat scores greater than 24 will be challenged
+# under_attack      Under Attack Mode
 
-#url2 = disable protection if load balancing is under 10
-url2="https://www.cloudflare.com/api_json.html?a=sec_lvl&tkn=API_KEY&email=MAIL_CCOUNT&z=DOMAIN&v=high"
+# Configuration API Cloudflare
+api_key=YOUR_API_KEY       # You're Global API Key, here : https://www.cloudflare.com/a/profile
+email=YOUR_EMAIL           # Email of your account Cloudflare
+zone_id=ZONE_ID_DOMAIN     # Zone ID, get here : https://www.cloudflare.com/a/overview/domain.com
+
 
 attacking=./attacking
  
@@ -38,15 +40,24 @@ if [ $(echo "$loadavg > $maxload"|bc) -eq 1 ];
 then
   if [[ $hasattack = 0 && $1 = 0 ]];
   then
+    # active protection
     echo 1 > $attacking
-    curl -s $url1
+    curl -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
+                  -H "X-Auth-Email: $email" \
+                  -H "X-Auth-Key: $api_key" \
+                  -H "Content-Type: application/json"
+    #curl -s $url1
 fi
 
 else
   if [[ $hasattack = 1 && $1 = 1 ]];
   then
+    # disable protection if load balancing is under 10
     echo 0 > $attacking
-    curl -s $url2
+    curl -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
+                  -H "X-Auth-Email: $email" \
+                  -H "X-Auth-Key: $api_key" \
+                  -H "Content-Type: application/json"
   fi
 fi
 
