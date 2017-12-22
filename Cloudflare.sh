@@ -28,7 +28,7 @@ zone_id=ZONE_ID_DOMAIN     # Zone ID, get here : https://www.cloudflare.com/a/ov
 
 attacking=./attacking
  
-# create file attacking if doesn't exist | créé le fichier attacking si existe pas
+# create file attacking if doesn't exist
 if [ ! -e $attacking ];
   then
   echo 0 > $attacking
@@ -46,7 +46,6 @@ then
                   -H "X-Auth-Email: $email" \
                   -H "X-Auth-Key: $api_key" \
                   -H "Content-Type: application/json"
-    #curl -s $url1
 fi
 
 else
