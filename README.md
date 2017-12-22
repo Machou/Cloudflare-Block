@@ -25,4 +25,4 @@ crontab -e
 
 ### License
 
-The script Real IP are distributed under the [The MIT License](https://opensource.org/licenses/MIT).
+**Cloudflare-Block** are distributed under the [The MIT License](https://opensource.org/licenses/MIT).
