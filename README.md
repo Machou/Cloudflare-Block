@@ -9,12 +9,7 @@ Enable Cloudflare protection " I'm Under Attack! " if the server load is greater
 #### Configure you API
 
 [Cloudflare API Documentation](https://api.cloudflare.com/#zone-settings-get-security-level-setting)
-```
-****    
-**** 
-****     
-**under_attack**  
-```
+
 | Mode         | Description   |
 |:------------:|:-------------:|
 | high         | Threat scores greater than 0 will be challenged   |
