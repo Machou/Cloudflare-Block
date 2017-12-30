@@ -1,26 +1,33 @@
 # Cloudflare-Block
 
-Enable Cloudflare protection " I'm Under Attack! " if the server load is greater than 10. (Possibility to customize the script.)
+Enable Cloudflare protection " I'm Under Attack! " if the server load is greater than 10.
+
+**Cloudflare.sh** will create a **attacking** file to check if the protection is enabled or disabled.
 
 ### Configuration
 
-Configure you API
+#### Configure you API
 
-https://www.cloudflare.com/api_json.html?a=sec_lvl&tkn=API_KEY&email=MAIL_CCOUNT&z=DOMAIN&v=help
+[Cloudflare API Documentation](https://api.cloudflare.com/#zone-settings-get-security-level-setting)
+
+high						Threat scores greater than 0 will be challenged
+medium					Threat scores greater than 14 will be challenged
+low							Threat scores greater than 24 will be challenged
+under_attack		Under Attack Mode
 
 ```
-API_KEY : API Key of account Cloudflare
-MAIL_ACCOUNT : Email of account Cloudflare
-DOMAIN : Domain you want protect
+API_KEY					You're Global API Key, here : https://www.cloudflare.com/a/profile
+MAIL_ACCOUNT		Email of your account Cloudflare
+DOMAIN					Zone ID, get here : https://www.cloudflare.com/a/overview/domain.com
 ```
 
-### Cron
+#### Cron
 
 ```
 crontab -e
 
-*/1 * * * * /root/a.sh 0 # check every 1 minutes, if load > 10, block
-*/20 * * * * /root/a.sh 1 # check every 20 minutes, if load < 10, disable protection
+*/1 * * * * /root/DDoS/Cloudflare.sh 0 # check every 1 minutes if protection is not enabled
+*/20 * * * * /root/DDoS/Cloudflare.sh 1 # check every 20 minutes if protection is enabled
 ```
 
 ### License
