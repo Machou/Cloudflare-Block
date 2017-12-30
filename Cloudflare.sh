@@ -3,9 +3,6 @@
 # Load average | $1 = 1min, $2 = 5min, $3 = 15min
 loadavg=$(cat /proc/loadavg|awk '{printf "%f", $1}')
 
-# Min load is 3, you can modify if you want more than 10
-minload=3
-
 # Max load is 10, you can modify if you want more than 10
 maxload=10
 
@@ -14,7 +11,7 @@ api_key=YOUR_API_KEY
 email=YOUR_EMAIL
 zone_id=ZONE_ID_DOMAIN
 
-# Mode Default
+# Mode Default ( high, medium, low )
 mode=high
 
 attacking=./attacking
@@ -41,7 +38,7 @@ then
   fi
 
 else
-  if [[ $hasattack = 1 && $1 < $minload ]];
+  if [[ $hasattack = 1 && $1 = 1 ]];
   then
     # Disable Protection
     echo 0 > $attacking
