@@ -16,9 +16,9 @@ low							Threat scores greater than 24 will be challenged
 under_attack		Under Attack Mode
 
 ```
-API_KEY					You're Global API Key, here : https://www.cloudflare.com/a/profile
+API_KEY			You're Global API Key, here : https://www.cloudflare.com/a/profile
 MAIL_ACCOUNT		Email of your account Cloudflare
-DOMAIN					Zone ID, get here : https://www.cloudflare.com/a/overview/domain.com
+DOMAIN			Zone ID, get here : https://www.cloudflare.com/a/overview/domain.com
 ```
 
 #### Cron
