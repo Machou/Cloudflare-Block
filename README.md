@@ -15,12 +15,12 @@ Enable Cloudflare protection " I'm Under Attack! " if the server load is greater
 ****     
 **under_attack**  
 ```
-| Mode        | Description           |
-| ------------- |:-------------:|
-| high      | Threat scores greater than 0 will be challenged |
-| medium      | Threat scores greater than 14 will be challenged      |
-| low | Threat scores greater than 24 will be challenged      |
-|under_attack  | Under Attack Mode |
+| Mode         | Description   |
+|:------------:|:-------------:|
+| high         | Threat scores greater than 0 will be challenged   |
+| medium       | Threat scores greater than 14 will be challenged  |
+| low          | Threat scores greater than 24 will be challenged  |
+|under_attack  | Under Attack Mode                                 |
 
 ```
 API_KEY			You're Global API Key, here : https://www.cloudflare.com/a/profile
