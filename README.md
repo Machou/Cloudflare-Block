@@ -27,9 +27,9 @@ git clone https://github.com/Machou/Cloudflare-Block.git
 |under_attack  | Under Attack Mode                                 |
 
 ```bash
-API_KEY				You're Global API Key (https://dash.cloudflare.com/profile)
+API_KEY			You're Global API Key (https://dash.cloudflare.com/profile)
 MAIL_ACCOUNT		Email of your Cloudflare account
-DOMAIN				Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
+DOMAIN			Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
 ```
 
 
