@@ -10,8 +10,7 @@ Enable Cloudflare protection " I'm Under Attack! " if the server load is greater
 #### The Script
 
 ```bash
-mkdir /root/DDoS && cd /root/DDoS
-git clone https://github.com/Machou/Cloudflare-Block.git
+cd /root && git clone https://github.com/Machou/Cloudflare-Block.git DDoS
 ```
 
 
