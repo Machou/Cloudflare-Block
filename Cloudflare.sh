@@ -2,7 +2,7 @@
 
 
 # $1 = 1min, $2 = 5min, $3 = 15min
-loadavg=$(cat /proc/loadavg|awk '{printf "%f", $1}')
+loadavg=$(awk '{printf "%f", $1}' < /proc/loadavg)
 
 
 # load is 10, you can modify this if you want load more than 10
@@ -44,12 +44,12 @@ api_set_mode() {
 
 
 # create file "attacked" if doesn't exist
-if [ ! -e $attacked_file ]; then
-	echo 0 > $attacked_file
+if [ ! -e "$attacked_file" ]; then
+	echo 0 > "$attacked_file"
 fi
 
 
-was_under_attack=$(cat $attacked_file)
+was_under_attack=$(cat "$attacked_file")
 under_attack=$(echo "$loadavg > $maxload" | bc)
 
 if [[ "$1" != [01] ]]; then
@@ -62,21 +62,21 @@ if [ $debug -eq 1 ]; then
 	echo "Load average: $loadavg"
 fi
 
-if [ $1 -eq 0 ] && [ $was_under_attack -eq 0 ] && [ $under_attack -eq 1 ]; then
+if [ "$1" -eq 0 ] && [ "$was_under_attack" -eq 0 ] && [ "$under_attack" -eq 1 ]; then
 	# attack just started and we want to enable under-attack mode
 
 	# Activate protection
-	[ $debug -eq 1 ] && echo "Activating under-attack mode!"
-	echo 1 > $attacked_file
+	[ "$debug" -eq 1 ] && echo "Activating under-attack mode!"
+	echo 1 > "$attacked_file"
 	api_set_mode under_attack
 
-elif [ $1 -eq 1 ] && [ $was_under_attack -eq 1 ] && [ $under_attack -eq 0 ]; then
+elif [ "$1" -eq 1 ] && [ "$was_under_attack" -eq 1 ] && [ "$under_attack" -eq 0 ]; then
 	# attack just finished (and up to 20 minutes passed since) 
 	# and we want to disable under-attack mode
 
 	# Disable Protection
-	[ $debug -eq 1 ] && echo "Leaving under-attack mode!"
-	echo 0 > $attacked_file
+	[ "$debug" -eq 1 ] && echo "Leaving under-attack mode!"
+	echo 0 > "$attacked_file"
 	api_set_mode high
 
 fi
