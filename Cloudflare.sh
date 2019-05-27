@@ -10,13 +10,13 @@ maxload=10
 
 
 # Configuration API Cloudflare
-# You're Global API Key (https://dash.cloudflare.com/profile)
+# Your Global API Key (https://dash.cloudflare.com/profile)
 api_key=
-# Email of your account Cloudflare
+# Email of your Cloudflare account
 email=
 # Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
 zone_id=
-
+# Whether to write debug messages to the debug.log file under script dir
 debug=0
 
 
