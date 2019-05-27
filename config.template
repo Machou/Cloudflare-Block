@@ -1,0 +1,12 @@
+# Copy it to 'config' and change for your liking
+
+# Your Global API Key (https://dash.cloudflare.com/profile)
+api_key=
+# Email of your Cloudflare account
+email=
+# Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
+zone_id=
+# Default security level when there is no attack, see in readme
+default_security_level=high
+# Whether to write debug messages to the debug.log file under script dir
+debug=0
