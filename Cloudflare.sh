@@ -24,6 +24,8 @@ basedir=$(dirname "$0")
 
 attacked_file=$basedir/attacked
 
+[ "$debug" -eq 1 ] && exec > "${logfile:-$basedir/debug.log}"
+
 
 # You can put aforementioned config values either in-place
 # or in the file named 'config' in the script's directory.
