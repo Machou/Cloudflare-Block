@@ -17,6 +17,9 @@ email=
 # Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
 zone_id=
 
+debug=0
+
+
 basedir=$(dirname "$0")
 
 attacked_file=$basedir/attacked
@@ -54,10 +57,16 @@ if [[ "$1" != [01] ]]; then
 	exit 1
 fi
 
+if [ $debug -eq 1 ]; then
+	echo "Mode: $1; was under attack: $was_under_attack; now under attack: $under_attack"
+	echo "Load average: $loadavg"
+fi
+
 if [ $1 -eq 0 ] && [ $was_under_attack -eq 0 ] && [ $under_attack -eq 1 ]; then
 	# attack just started and we want to enable under-attack mode
 
 	# Activate protection
+	[ $debug -eq 1 ] && echo "Activating under-attack mode!"
 	echo 1 > $attacked_file
 	api_set_mode under_attack
 
@@ -66,6 +75,7 @@ elif [ $1 -eq 1 ] && [ $was_under_attack -eq 1 ] && [ $under_attack -eq 0 ]; the
 	# and we want to disable under-attack mode
 
 	# Disable Protection
+	[ $debug -eq 1 ] && echo "Leaving under-attack mode!"
 	echo 0 > $attacked_file
 	api_set_mode high
 
