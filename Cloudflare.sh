@@ -33,32 +33,31 @@ fi
 
 
 was_under_attack=$(cat $attacked_file)
+under_attack=$(echo "$loadavg > $maxload" | bc)
 
+if [ $1 -eq 0 ] && [ $was_under_attack -eq 0 ] && [ $under_attack -eq 1 ]; then
+	# attack just started and we want to enable under-attack mode
 
-if [ $(echo "$loadavg > $maxload"|bc) -eq 1 ]; then
+	# Activate protection
+	echo 1 > $attacked_file
+	curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
+					-H "X-Auth-Email: $email" \
+					-H "X-Auth-Key: $api_key" \
+					-H "Content-Type: application/json" \
+					--data '{"value":"under_attack"}'
 
-	if [[ $was_under_attack = 0 && $1 = 0 ]]; then
+elif [ $1 -eq 1 ] && [ $was_under_attack -eq 1 ] && [ $under_attack -eq 0 ]; then
+	# attack just finished (and up to 20 minutes passed since) 
+	# and we want to disable under-attack mode
 
-		# Active protection
-		echo 1 > $attacked_file
-		curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
-						-H "X-Auth-Email: $email" \
-						-H "X-Auth-Key: $api_key" \
-						-H "Content-Type: application/json" \
-						--data '{"value":"under_attack"}'
-	fi
+	# Disable Protection
+	echo 0 > $attacked_file
+	curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
+					-H "X-Auth-Email: $email" \
+					-H "X-Auth-Key: $api_key" \
+					-H "Content-Type: application/json" \
+					--data '{"value":"high"}'
 
-	else
-		if [[ $was_under_attack = 1 && $1 = 1 ]]; then
-
-		# Disable Protection
-		echo 0 > $attacked_file
-		curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
-						-H "X-Auth-Email: $email" \
-						-H "X-Auth-Key: $api_key" \
-						-H "Content-Type: application/json" \
-						--data '{"value":"high"}'
-	fi
 fi
 
 exit 0
