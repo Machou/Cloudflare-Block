@@ -17,8 +17,14 @@ email=
 # Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
 zone_id=
 
-
 attacked_file=./attacked
+
+
+# You can put aforementioned config values either in-place
+# or in the file named 'config' in the script's directory.
+config_file=$(dirname $(basename "$0"))/config
+[ -e "$config_file" ] && source "$config_file"
+
 
 # create file "attacked" if doesn't exist
 if [ ! -e $attacked_file ]; then
