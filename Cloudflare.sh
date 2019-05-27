@@ -16,6 +16,8 @@ api_key=
 email=
 # Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
 zone_id=
+# Default security level when there is no attack, see in readme
+default_security_level=high
 # Whether to write debug messages to the debug.log file under script dir
 debug=0
 
@@ -79,7 +81,7 @@ elif [ "$1" -eq 1 ] && [ "$was_under_attack" -eq 1 ] && [ "$under_attack" -eq 0 
 	# Disable Protection
 	[ "$debug" -eq 1 ] && echo "Leaving under-attack mode!"
 	echo 0 > "$attacked_file"
-	api_set_mode high
+	api_set_mode "$default_security_level"
 
 fi
 
