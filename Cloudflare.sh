@@ -49,6 +49,11 @@ fi
 was_under_attack=$(cat $attacked_file)
 under_attack=$(echo "$loadavg > $maxload" | bc)
 
+if [[ "$1" != [01] ]]; then
+	echo "Incorrect usage! Please pass either 0 or 1 as an argument"
+	exit 1
+fi
+
 if [ $1 -eq 0 ] && [ $was_under_attack -eq 0 ] && [ $under_attack -eq 1 ]; then
 	# attack just started and we want to enable under-attack mode
 
