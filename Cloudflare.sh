@@ -18,12 +18,12 @@ email=
 zone_id=
 
 
+attacked=./attacked
+
 # create file "attacked" if doesn't exist
 if [ ! -e $attacked ]; then
 	echo 0 > $attacked
 fi
-
-attacked=./attacked
 
 
 hasattack=$(cat $attacked)
