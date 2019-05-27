@@ -15,18 +15,18 @@ api_key=
 # Email of your account Cloudflare
 email=
 # Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
-zone_id=     
+zone_id=
 
 
-# create file attacking if doesn't exist
-if [ ! -e $attacking ]; then
-	echo 0 > $attacking
+# create file "attacked" if doesn't exist
+if [ ! -e $attacked ]; then
+	echo 0 > $attacked
 fi
 
-attacking=./attacking
+attacked=./attacked
 
 
-hasattack=$(cat $attacking)
+hasattack=$(cat $attacked)
 
 
 if [ $(echo "$loadavg > $maxload"|bc) -eq 1 ]; then
@@ -34,7 +34,7 @@ if [ $(echo "$loadavg > $maxload"|bc) -eq 1 ]; then
 	if [[ $hasattack = 0 && $1 = 0 ]]; then
 
 		# Active protection
-		echo 1 > $attacking
+		echo 1 > $attacked
 		curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
 						-H "X-Auth-Email: $email" \
 						-H "X-Auth-Key: $api_key" \
@@ -46,7 +46,7 @@ if [ $(echo "$loadavg > $maxload"|bc) -eq 1 ]; then
 		if [[ $hasattack = 1 && $1 = 1 ]]; then
 
 		# Disable Protection
-		echo 0 > $attacking
+		echo 0 > $attacked
 		curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
 						-H "X-Auth-Email: $email" \
 						-H "X-Auth-Key: $api_key" \
