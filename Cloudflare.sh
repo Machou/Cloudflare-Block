@@ -26,6 +26,18 @@ config_file=$(dirname $(basename "$0"))/config
 [ -e "$config_file" ] && source "$config_file"
 
 
+api_set_mode() {
+	local mode
+	mode=$1
+	curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
+		-H "X-Auth-Email: $email" \
+		-H "X-Auth-Key: $api_key" \
+		-H "Content-Type: application/json" \
+		--data "{\"value\":\"$mode\"}" \
+	|| echo "Error: failed to set security level to $mode" >&2
+}
+
+
 # create file "attacked" if doesn't exist
 if [ ! -e $attacked_file ]; then
 	echo 0 > $attacked_file
@@ -40,11 +52,7 @@ if [ $1 -eq 0 ] && [ $was_under_attack -eq 0 ] && [ $under_attack -eq 1 ]; then
 
 	# Activate protection
 	echo 1 > $attacked_file
-	curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
-					-H "X-Auth-Email: $email" \
-					-H "X-Auth-Key: $api_key" \
-					-H "Content-Type: application/json" \
-					--data '{"value":"under_attack"}'
+	api_set_mode under_attack
 
 elif [ $1 -eq 1 ] && [ $was_under_attack -eq 1 ] && [ $under_attack -eq 0 ]; then
 	# attack just finished (and up to 20 minutes passed since) 
@@ -52,11 +60,7 @@ elif [ $1 -eq 1 ] && [ $was_under_attack -eq 1 ] && [ $under_attack -eq 0 ]; the
 
 	# Disable Protection
 	echo 0 > $attacked_file
-	curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_id/settings/security_level" \
-					-H "X-Auth-Email: $email" \
-					-H "X-Auth-Key: $api_key" \
-					-H "Content-Type: application/json" \
-					--data '{"value":"high"}'
+	api_set_mode high
 
 fi
 
