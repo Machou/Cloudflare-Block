@@ -39,7 +39,7 @@ api_set_mode() {
 		-H "X-Auth-Key: $api_key" \
 		-H "Content-Type: application/json" \
 		--data "{\"value\":\"$mode\"}" \
-	|| echo "Error: failed to set security level to $mode" >&2
+	|| echo "Error: failed to set security level to $mode"
 }
 
 
