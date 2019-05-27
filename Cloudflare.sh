@@ -32,12 +32,12 @@ if [ ! -e $attacked_file ]; then
 fi
 
 
-hasattack=$(cat $attacked_file)
+was_under_attack=$(cat $attacked_file)
 
 
 if [ $(echo "$loadavg > $maxload"|bc) -eq 1 ]; then
 
-	if [[ $hasattack = 0 && $1 = 0 ]]; then
+	if [[ $was_under_attack = 0 && $1 = 0 ]]; then
 
 		# Active protection
 		echo 1 > $attacked_file
@@ -49,7 +49,7 @@ if [ $(echo "$loadavg > $maxload"|bc) -eq 1 ]; then
 	fi
 
 	else
-		if [[ $hasattack = 1 && $1 = 1 ]]; then
+		if [[ $was_under_attack = 1 && $1 = 1 ]]; then
 
 		# Disable Protection
 		echo 0 > $attacked_file
