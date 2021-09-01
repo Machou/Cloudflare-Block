@@ -20,7 +20,9 @@ Copy config file `config.template` to `config` and edit it:
 add API keys (mandatory) and optionally change some of the other values.
 
 **API_KEY**: Your Global API Key (https://dash.cloudflare.com/profile)
+
 **MAIL_ACCOUNT**: Email of your Cloudflare account
+
 **DOMAIN**: Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
 
 
