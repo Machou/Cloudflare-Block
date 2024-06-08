@@ -10,7 +10,7 @@ The **Cloudflare.sh** will create a file named **attacked** to check if the prot
 ### The Script
 
 ```bash
-cd /root && git clone https://github.com/Machou/Cloudflare-Block.git DDoS
+git clone https://github.com/Machou/Cloudflare-Block.git DDoS
 ```
 
 
