@@ -1,18 +1,18 @@
 # Cloudflare-Block
 
-This script will enable Cloudflare protection *“I'm Under Attack!”* if the server load-average is greater than 10. (can be modified)
+This script enable *I'm Under Attack Mode* of [Cloudflare](https://www.cloudflare.com/) if your server's load average exceeds a predefined limit.
 
-The **Cloudflare.sh** will create a file named **attacked** to check if the protection is *enabled* or *disabled*.
+**Cloudflare.sh** will create a file named **attacked** to check if the protection is *enabled* or *disabled*.
 
+Load average is checked via a cron job (default: every 20 minutes)
 
 ## Configuration
 
-### The Script
+### Script
 
 ```bash
 git clone https://github.com/Machou/Cloudflare-Block.git DDoS
 ```
-
 
 ### Configure you API
 
@@ -25,7 +25,6 @@ add API keys (mandatory) and optionally change some of the other values.
 
 **DOMAIN**: Zone ID (https://dash.cloudflare.com/_zone-id_/domain.com)
 
-
 [Cloudflare API Documentation](https://api.cloudflare.com/#zone-settings-get-security-level-setting)
 
 | Mode         | Description   |
@@ -35,7 +34,6 @@ add API keys (mandatory) and optionally change some of the other values.
 | low          | Threat scores greater than 24 will be challenged  |
 |under_attack  | Under Attack Mode                                 |
 
-
 ### Cron
 
 ```bash
@@ -44,7 +42,6 @@ crontab -e
 */1 * * * * /root/DDoS/Cloudflare.sh 0 # check every 1 minute if protection is not enabled
 */20 * * * * /root/DDoS/Cloudflare.sh 1 # check every 20 minutes if protection is enabled
 ```
-
 
 ### License
 
